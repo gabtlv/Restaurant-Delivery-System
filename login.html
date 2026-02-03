@@ -1,14 +1,73 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Customer Login</title>
-    </head>
-    <body>
-        <h2>Customer Login</h2>
-                <form action="login" method="post">
-            Email: <input type="text" name="email" required><br><br>
-            Password: <input type="password" name="password" required><br><br>
-            <input type="submit" value="Login"> 
-        </form>
-    </body>
+<head>
+    <title>Customer Login</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Container styling for the body content */
+        h2 {
+            color: #2c3e50;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 320px;
+            text-align: left; /* Aligns labels to the left for better readability */
+        }
+
+        /* Styling the raw text and inputs */
+        input[type="text"], 
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box; /* Prevents width overflow */
+            font-size: 1rem;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+        
+    </style>
+</head>
+<body>
+    <h2>Customer Login</h2>
+    <form action="login" method="post">
+        Email: <input type="text" name="email" required><br><br>
+        Password: <input type="password" name="password" required><br><br>
+        <input type="submit" value="Login"> 
+    </form>
+</body>
 </html>
