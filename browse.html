@@ -3,12 +3,8 @@
 <head>
     <title>Menu Browser</title>
     <style>
-    body { 
-        font-family: Arial, sans-serif; 
-        padding: 20px; 
-        text-align: center; 
-        background-color: #f9f9f9; 
-    }
+    body { font-family: Arial, sans-serif; background-color: #f9f9f9; padding-top: 50px; text-align: center; margin: 0; }
+        
 
     .search-box { 
         margin-bottom: 30px; 
@@ -60,12 +56,16 @@
         color: #3498db; 
         text-decoration: none; 
     }
+    
+    h1 { margin: 0; margin-bottom: 10px;}
+    h3 { margin: 0; margin-bottom: 40px}
 </style>
 </head>
 <body>
 
+    <h1>Burger Buns</h1>
+    <h3>Online Delivery Service</h3>
     <div class="search-box">
-        <h1>Welcome to Burger Buns</h1>
         <form action="browse" method="get">
             <input type="text" name="queryText" placeholder="Enter exact food name..." required>
             <button type="submit">Search Menu</button>
@@ -74,11 +74,11 @@
 
     <table>
         <tr>
-            <td><img src="images/burger1.jpg"><span class="title">Leilo Burger</span><span class="desc">Juicy beef with secret sauce.</span></td>
-            <td><img src="images/burger2.jpg"><span class="title">Gab Burger</span><span class="desc">Double cheese delight.</span></td>
-            <td><img src="images/fries.jpg"><span class="title">Faezah Fries</span><span class="desc">Crispy golden potato fries.</span></td>
-            <td><img src="images/juice.jpg"><span class="title">Jaundel Juice</span><span class="desc">Freshly squeezed fruit.</span></td>
-            <td><img src="images/rings.jpg"><span class="title">Obehi Onion Rings</span><span class="desc">Crunchy battered rings.</span></td>
+            <td><img src="images/leiloburger.png"><span class="title">Leilo's Burger</span><span class="desc">Juicy beef with secret sauce.</span></td>
+            <td><img src="images/gabburger.png"><span class="title">Gab's Burger</span><span class="desc">Juicer beef with even more secret sauce.</span></td>
+            <td><img src="images/fries.png"><span class="title">Signature Fries</span><span class="desc">Crispy golden potato fries.</span></td>
+            <td><img src="images/drink.png"><span class="title">Coke Zero</span><span class="desc">Ice cold Coke Zero.</span></td>
+            <td><img src="images/icecream.png"><span class="title">Ice Cream Cone</span><span class="desc">Sweet and creamy soft serve.</span></td>
         </tr>
     </table>
 
