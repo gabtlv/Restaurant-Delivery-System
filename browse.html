@@ -1,30 +1,87 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Browse Menu</title>
+    <title>Menu Browser</title>
+    <style>
+    body { 
+        font-family: Arial, sans-serif; 
+        padding: 20px; 
+        text-align: center; 
+        background-color: #f9f9f9; 
+    }
+
+    .search-box { 
+        margin-bottom: 30px; 
+        display: inline-block; 
+    }
+
+    table { 
+        width: 100%; 
+        max-width: 1100px; 
+        margin: 0 auto; 
+        border-collapse: separate; 
+        border-spacing: 15px; 
+    }
+
+    td { 
+        width: 20%; 
+        padding: 15px; 
+        vertical-align: top; 
+        background-color: white; 
+        border-radius: 10px; 
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+    }
+
+    img { 
+        width: 100%; 
+        max-width: 150px; 
+        height: 120px; 
+        object-fit: cover; 
+        border-radius: 8px; 
+    }
+
+    .title { 
+        font-weight: bold; 
+        display: block; 
+        margin-top: 10px; 
+        font-size: 1.1em; 
+    }
+
+    .desc { 
+        font-size: 0.9em; 
+        color: #666; 
+        display: block; 
+        margin-top: 5px; 
+    }
+
+    .back-link { 
+        margin-top: 30px; 
+        display: inline-block; 
+        color: #3498db; 
+        text-decoration: none; 
+    }
+</style>
 </head>
 <body>
-  <h2>Browse Menu</h2>
 
-  <form action="browse" method="get">
-    Search item name:
-    <input type="text" name="query" placeholder="e.g. leilo burger, gab burger" />
-    <br><br>
-    Or choose from menu:
-    <select name="querySelect">
-        <option value="">--</option>
-        <option value="Leilo Burger">Leilo Burger</option>
-        <option value="Gab Burger">Gab Burger</option>
-        <option value="Faezah Fries">Faezah Fries</option>
-        <option value="Jaundel Juice">Jaundel Juice</option>
-        <option value="Obehi Onion Rings"> Obehi Onion Rings</option>
-        <option value="Tuff Truffle">Tuff Truffle</option>
-    </select>
-    <br><br>
-    <input type="submit" value="Search" />
-  </form>
+    <div class="search-box">
+        <h1>Welcome to Burger Buns</h1>
+        <form action="browse" method="get">
+            <input type="text" name="queryText" placeholder="Enter exact food name..." required>
+            <button type="submit">Search Menu</button>
+        </form>
+    </div>
 
-  <br>
-  <a href="login.html">Back to Login</a>
+    <table>
+        <tr>
+            <td><img src="images/burger1.jpg"><span class="title">Leilo Burger</span><span class="desc">Juicy beef with secret sauce.</span></td>
+            <td><img src="images/burger2.jpg"><span class="title">Gab Burger</span><span class="desc">Double cheese delight.</span></td>
+            <td><img src="images/fries.jpg"><span class="title">Faezah Fries</span><span class="desc">Crispy golden potato fries.</span></td>
+            <td><img src="images/juice.jpg"><span class="title">Jaundel Juice</span><span class="desc">Freshly squeezed fruit.</span></td>
+            <td><img src="images/rings.jpg"><span class="title">Obehi Onion Rings</span><span class="desc">Crunchy battered rings.</span></td>
+        </tr>
+    </table>
+
+    <a href="login.html" class="back-link">Back to Login</a>
 </body>
 </html>

@@ -3,13 +3,11 @@ package com.mycompany.lab2exc2;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "BrowseServlet", urlPatterns = {"/browse"})
 public class BrowseServlet extends HttpServlet {
@@ -18,65 +16,31 @@ public class BrowseServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // --- Login check (optional, keep if required in your lab) ---
-        HttpSession session = request.getSession(false);
-        boolean loggedIn = (session != null && Boolean.TRUE.equals(session.getAttribute("loggedIn")));
+        // 1. Get the search input from browse.html
+        String query = request.getParameter("queryText");
+        List<MenuItem> results = new ArrayList<>();
 
-        if (!loggedIn) {
-            request.setAttribute("error", "Please log in before browsing the menu.");
-            RequestDispatcher rd = request.getRequestDispatcher("login.html");
-            rd.forward(request, response);
-            return;
-        }
+        // 2. The master list of MenuItem objects
+        List<MenuItem> fullMenu = new ArrayList<>();
+        fullMenu.add(new MenuItem("Leilo Burger", "Juicy beef with secret sauce.", "images/burger1.jpg"));
+        fullMenu.add(new MenuItem("Gab Burger", "Double cheese delight.", "images/burger2.jpg"));
+        fullMenu.add(new MenuItem("Faezah Fries", "Crispy golden potato fries.", "images/fries.jpg"));
+        fullMenu.add(new MenuItem("Jaundel Juice", "Freshly squeezed fruit.", "images/juice.jpg"));
+        fullMenu.add(new MenuItem("Obehi Onion Rings", "Crunchy battered rings.", "images/rings.jpg"));
+        fullMenu.add(new MenuItem("Tuff Truffle", "Luxury mushroom pasta.", "images/truffle.jpg"));
 
-        // --- Get both inputs ---
-        String queryText = request.getParameter("queryText");
-        String querySelect = request.getParameter("querySelect");
-
-        // Decide which query to use (text has priority)
-        String query = "";
-        boolean usedDropdown = false;
-
-        if (queryText != null && !queryText.trim().isEmpty()) {
-            query = queryText.trim();
-        } else if (querySelect != null && !querySelect.trim().isEmpty()) {
-            query = querySelect.trim();
-            usedDropdown = true;
-        }
-
-        // --- Menu items ---
-        List<String> menuItems = new ArrayList<>();
-        menuItems.add("Leilo Burger");
-        menuItems.add("Gab Burger");
-        menuItems.add("Faezah Fries");
-        menuItems.add("Jaundel Juice");
-        menuItems.add("Obehi Onion Rings");
-        menuItems.add("Tuff Truffle");
-
-        // --- Filter results ---
-        List<String> filtered = new ArrayList<>();
-        for (String item : menuItems) {
-            if (query.isEmpty()) {
-                // nothing entered/selected -> show all
-                filtered.add(item);
-            } else if (usedDropdown) {
-                // dropdown selection -> exact match
-                if (item.equalsIgnoreCase(query)) {
-                    filtered.add(item);
-                }
-            } else {
-                // text search -> partial match
-                if (item.toLowerCase().contains(query.toLowerCase())) {
-                    filtered.add(item);
+        // 3. Comparison Logic
+        if (query != null && !query.trim().isEmpty()) {
+            for (MenuItem item : fullMenu) {
+                // Exact character string comparison (case-insensitive)
+                if (item.getName().equalsIgnoreCase(query.trim())) {
+                    results.add(item);
                 }
             }
         }
 
-        // --- Send to JSP ---
-        request.setAttribute("query", query);
-        request.setAttribute("menuItems", filtered);
-
-        RequestDispatcher rd = request.getRequestDispatcher("browse.jsp");
-        rd.forward(request, response);
+        // 4. Send the result list to the JSP
+        request.setAttribute("menuResults", results);
+        request.getRequestDispatcher("browse.jsp").forward(request, response);
     }
 }
