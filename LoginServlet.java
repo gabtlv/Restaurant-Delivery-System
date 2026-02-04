@@ -15,24 +15,19 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // 1. Extract parameters
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        // 2. Simple Validation Logic
         boolean success = (email != null && email.contains("@") && 
                            password != null && password.length() >= 4);
 
-        // 3. Session Management
         HttpSession session = request.getSession();
         session.setAttribute("loggedIn", success);
 
         if (success) {
-            // Success Path: Redirect to avoid "Form Resubmission" issues
             session.setAttribute("customerEmail", email);
-            response.sendRedirect("browse.html");
+            response.sendRedirect("browse");
         } else {
-            // Failure Path: Forward to show error messages
             session.removeAttribute("customerEmail");
             request.setAttribute("loginSuccess", false);
             request.setAttribute("email", email);

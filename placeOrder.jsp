@@ -3,7 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Login Failed</title>
+    <title>Place Order</title>
     <style>
         body { font-family: Arial, sans-serif; background-color: #f9f9f9; padding-top: 50px; text-align: center; margin: 0; }
         .login-box { 
@@ -35,8 +35,13 @@
     <h3>Online Delivery Service</h3>
     <div class="login-box">
         <h2>Login</h2>
-        <p>Invalid Login Credentials. Please try again.</p>
-        <a href="login.html" class="back-link">Back to Login</a>
+        <form action="login" method="post">
+            <input type="name" name="name" placeholder="Full Name" required>
+            <input type="address" name="address" placeholder="Delivery Address" required>
+            <input type="cardnumber" name="cardnumber" placeholder="9 Digit Card Number" required>
+            <button type="submit">Confirm and Place Order</button>
+        </form>
+        <a href="viewCart.jsp" class="back-link">Back to Cart</a>
     </div>
 
 </body>
