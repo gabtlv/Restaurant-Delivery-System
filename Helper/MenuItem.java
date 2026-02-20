@@ -1,26 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package com.mycompany.lab2exc2;
+package Helper;
 
-/**
- *
- * @author student
- */
 public class MenuItem {
     private String name;
     private String description;
     private String imagePath;
+    private Double price;
 
-    public MenuItem(String name, String description, String imagePath) {
+    public MenuItem(String name, String description, String imagePath, double price) {
         this.name = name;
         this.description = description;
         this.imagePath = imagePath;
+        this.price = price;
     }
-    // Getters
+    
     public String getName() { return name; }
     public String getDescription() { return description; }
     public String getImagePath() { return imagePath; }
+    public Double getPrice() { return price; }
 }
