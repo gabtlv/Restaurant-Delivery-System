@@ -16,15 +16,19 @@ public class AddtoCartServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        // 1. Get the item name from the form
         String itemName = request.getParameter("itemName");
+        
         if (itemName == null || itemName.trim().isEmpty()) {
             response.sendRedirect(request.getContextPath() + "/browse");
             return;
         }
 
-        // Find the MenuItem object by name
+        // 2. Find the item. 
+        // Optimization: It's better to fetch from the DB only if needed.
         MenuItem found = null;
-        List<MenuItem> allItems = MenuItem_CRUD.getMenuList(); // or use items from context
+        List<MenuItem> allItems = MenuItem_CRUD.getMenuList(); 
+        
         for (MenuItem m : allItems) {
             if (m.getName().equalsIgnoreCase(itemName)) {
                 found = m;
@@ -32,18 +36,21 @@ public class AddtoCartServlet extends HttpServlet {
             }
         }
 
-        if (found == null) {
-            response.sendRedirect(request.getContextPath() + "/browse");
-            return;
+        if (found != null) {
+            // 3. Get/Create the cart in the SESSION
+            HttpSession session = request.getSession(true);
+            List<MenuItem> cart = (List<MenuItem>) session.getAttribute("cartItems");
+            
+            if (cart == null) {
+                cart = new ArrayList<>();
+            }
+
+            // 4. Add the item and save back to session
+            cart.add(found);
+            session.setAttribute("cartItems", cart);
         }
 
-        HttpSession session = request.getSession();
-        List<MenuItem> cart = (List<MenuItem>) session.getAttribute("cartItems");
-        if (cart == null) cart = new ArrayList<>();
-
-        cart.add(found);
-        session.setAttribute("cartItems", cart);
-
+        // 5. Redirect back to the browse SERVLET to refresh the page
         response.sendRedirect(request.getContextPath() + "/browse");
     }
 }
