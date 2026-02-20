@@ -27,6 +27,6 @@ public class CartServlet extends HttpServlet {
         request.setAttribute("grandTotal", grandTotal);
         
         // Forward the request to the JSP file
-        request.getRequestDispatcher("cart.jsp").forward(request, response);
+        request.getRequestDispatcher("viewCart.jsp").forward(request, response);
     }
 }
