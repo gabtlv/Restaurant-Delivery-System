@@ -6,86 +6,17 @@
 <head>
     <title>Menu Browser</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            padding-top: 50px;
-            text-align: center;
-            margin: 0;
-        }
-
-        .search-box, .cart-box {
-            margin-bottom: 20px;
-            display: inline-block;
-            padding: 20px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
+        body { font-family: Arial, sans-serif; background-color: #f9f9f9; padding-top: 50px; text-align: center; margin: 0; }
+        .search-box, .cart-box { margin-bottom: 20px; display: inline-block; padding: 20px; background-color: white; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         .cart-box { margin-left: 15px; }
-
-        button {
-            background-color: green;
-            color: white;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            padding: 10px 16px;
-        }
-
-        table {
-            width: 100%;
-            max-width: 1100px;
-            margin: 0 auto;
-            border-collapse: separate;
-            border-spacing: 15px;
-        }
-
-        td {
-            width: 20%;
-            padding: 15px;
-            vertical-align: top;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        img {
-            width: 100%;
-            max-width: 150px;
-            height: 120px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-
-        .title {
-            font-weight: bold;
-            display: block;
-            margin-top: 10px;
-            font-size: 1.1em;
-        }
-
-        .desc {
-            font-size: 0.9em;
-            color: #666;
-            display: block;
-            margin-top: 5px;
-            min-height: 40px;
-        }
-
-        .price {
-            display: block;
-            margin-top: 8px;
-            font-weight: bold;
-        }
-
-        .back-link {
-            margin-top: 30px;
-            display: inline-block;
-            color: green;
-        }
-
+        button { background-color: green; color: white; border: none; border-radius: 25px; cursor: pointer; padding: 10px 16px; }
+        table { width: 100%; max-width: 1100px; margin: 0 auto; border-collapse: separate; border-spacing: 15px; }
+        td { width: 20%; padding: 15px; vertical-align: top; background-color: white; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        img { width: 100%; max-width: 150px; height: 120px; object-fit: cover; border-radius: 8px; }
+        .title { font-weight: bold; display: block; margin-top: 10px; font-size: 1.1em; }
+        .desc { font-size: 0.9em; color: #666; display: block; margin-top: 5px; min-height: 40px; }
+        .price { display: block; margin-top: 8px; font-weight: bold; }
+        .back-link { margin-top: 30px; display: inline-block; color: green; }
         h1 { margin: 0; margin-bottom: 10px; }
         h3 { margin: 0; margin-bottom: 30px; }
     </style>
@@ -105,16 +36,16 @@
 
     <div class="cart-box">
         <%
-            List<String> cart = (List<String>) session.getAttribute("cartItems");
+            // Updated to look for MenuItem objects to match your cart logic
+            List<MenuItem> cart = (List<MenuItem>) session.getAttribute("cartItems");
             int cartCount = (cart != null) ? cart.size() : 0;
         %>
-        <form action="viewCart.jsp" method="get">
+        <form action="<%= request.getContextPath() %>/viewCart" method="get">
             <button type="submit">Go to Cart (<%= cartCount %>)</button>
         </form>
     </div>
 
     <%
-        // Use search results if present, otherwise use normal browse list
         List<MenuItem> menuItems = (List<MenuItem>) request.getAttribute("menuResults");
         if (menuItems == null) {
             menuItems = (List<MenuItem>) request.getAttribute("menuItems");
@@ -137,9 +68,8 @@
                             <img src="<%= item.getImagePath() %>" alt="<%= item.getName() %>">
                             <span class="title"><%= item.getName() %></span>
                             <span class="desc"><%= item.getDescription() %></span>
-                            <span class="price">$<%= item.getPrice() %></span>
+                            <span class="price">$<%= String.format("%.2f", item.getPrice()) %></span>
 
-                            <!-- ADD TO CART BUTTON -->
                             <form action="<%= request.getContextPath() %>/addToCart" method="post" style="margin-top: 10px;">
                                 <input type="hidden" name="itemName" value="<%= item.getName() %>">
                                 <button type="submit">Add to Cart</button>
