@@ -9,38 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "BrowseServlet", urlPatterns = {"/browse"})
+@WebServlet("/browse")
 public class BrowseServlet extends HttpServlet {
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
+        
+        List<MenuItem> items = new ArrayList<>();
+        items.add(new MenuItem("Leilo's Burger", "Juicy beef patty with cheese.", "images/leiloburger.png", 5.0));
+        items.add(new MenuItem("Gab's Burger", "Juicier beef with cheesier cheese.", "images/gabburger.png", 5.0));
+        items.add(new MenuItem("French Fries", "Basket of golden fries.", "images/fries.png", 3.0));
+        items.add(new MenuItem("Fountain Drink", "Soda with ice.", "images/drink.png", 2.0));
+        items.add(new MenuItem("Ice Cream Cone", "Sweet and creamy soft serve on a waffle cone.", "images/icecream.png", 3.0));
 
-        // 1. Get the search input from browse.html
-        String query = request.getParameter("queryText");
-        List<MenuItem> results = new ArrayList<>();
+        getServletContext().setAttribute("menuItems", items);
+        request.setAttribute("menuItems", items);
+        
 
-        // 2. The master list of MenuItem objects
-        List<MenuItem> fullMenu = new ArrayList<>();
-        fullMenu.add(new MenuItem("Leilo Burger", "Juicy beef with secret sauce.", "images/burger1.jpg"));
-        fullMenu.add(new MenuItem("Gab Burger", "Double cheese delight.", "images/burger2.jpg"));
-        fullMenu.add(new MenuItem("Faezah Fries", "Crispy golden potato fries.", "images/fries.jpg"));
-        fullMenu.add(new MenuItem("Jaundel Juice", "Freshly squeezed fruit.", "images/juice.jpg"));
-        fullMenu.add(new MenuItem("Obehi Onion Rings", "Crunchy battered rings.", "images/rings.jpg"));
-        fullMenu.add(new MenuItem("Tuff Truffle", "Luxury mushroom pasta.", "images/truffle.jpg"));
-
-        // 3. Comparison Logic
-        if (query != null && !query.trim().isEmpty()) {
-            for (MenuItem item : fullMenu) {
-                // Exact character string comparison (case-insensitive)
-                if (item.getName().equalsIgnoreCase(query.trim())) {
-                    results.add(item);
-                }
-            }
-        }
-
-        // 4. Send the result list to the JSP
-        request.setAttribute("menuResults", results);
-        request.getRequestDispatcher("browse.jsp").forward(request, response);
+        request.getRequestDispatcher("browseMenu.jsp").forward(request, response);
     }
 }
