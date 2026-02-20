@@ -16,7 +16,7 @@
         .title { font-weight: bold; display: block; margin-top: 10px; font-size: 1.1em; }
         .desc { font-size: 0.9em; color: #666; display: block; margin-top: 5px; min-height: 40px; }
         .price { display: block; margin-top: 8px; font-weight: bold; }
-        .back-link { margin-top: 30px; display: inline-block; color: green; }
+        .back-link { margin-top: 30px; display: inline-block; color: green; text-decoration: none; }
         h1 { margin: 0; margin-bottom: 10px; }
         h3 { margin: 0; margin-bottom: 30px; }
     </style>
@@ -36,7 +36,7 @@
 
     <div class="cart-box">
         <%
-            // Updated to look for MenuItem objects to match your cart logic
+            // Use List<MenuItem> to match your cart page's logic
             List<MenuItem> cart = (List<MenuItem>) session.getAttribute("cartItems");
             int cartCount = (cart != null) ? cart.size() : 0;
         %>
@@ -80,7 +80,7 @@
                     }
                 } else {
             %>
-                    <td colspan="5">No items found. Please try a different search.</td>
+                    <td colspan="5">No items found.</td>
             <%
                 }
             %>
