@@ -1,4 +1,6 @@
-package com.mycompany.lab2exc2;
+package Business;
+
+import Helper.MenuItem;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,6 +27,6 @@ public class BrowseServlet extends HttpServlet {
         request.setAttribute("menuItems", items);
         
 
-        request.getRequestDispatcher("browseMenu.jsp").forward(request, response);
+        request.getRequestDispatcher("browse.jsp").forward(request, response);
     }
 }
