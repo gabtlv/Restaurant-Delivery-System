@@ -9,14 +9,15 @@
         body { font-family: Arial, sans-serif; background-color: #f9f9f9; padding-top: 50px; text-align: center; margin: 0; }
         .search-box, .cart-box { margin-bottom: 20px; display: inline-block; padding: 20px; background-color: white; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         .cart-box { margin-left: 15px; }
-        button { background-color: green; color: white; border: none; border-radius: 25px; cursor: pointer; padding: 10px 16px; }
+        button { background-color: green; color: white; border: none; border-radius: 25px; cursor: pointer; padding: 10px 16px; font-weight: bold; }
+        button:hover { background-color: darkgreen; }
         table { width: 100%; max-width: 1100px; margin: 0 auto; border-collapse: separate; border-spacing: 15px; }
         td { width: 20%; padding: 15px; vertical-align: top; background-color: white; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         img { width: 100%; max-width: 150px; height: 120px; object-fit: cover; border-radius: 8px; }
         .title { font-weight: bold; display: block; margin-top: 10px; font-size: 1.1em; }
         .desc { font-size: 0.9em; color: #666; display: block; margin-top: 5px; min-height: 40px; }
-        .price { display: block; margin-top: 8px; font-weight: bold; }
-        .back-link { margin-top: 30px; display: inline-block; color: green; text-decoration: none; }
+        .price { display: block; margin-top: 8px; font-weight: bold; color: #2c3e50; }
+        .back-link { margin-top: 30px; display: inline-block; color: green; text-decoration: none; font-weight: bold; }
         h1 { margin: 0; margin-bottom: 10px; }
         h3 { margin: 0; margin-bottom: 30px; }
     </style>
@@ -36,9 +37,9 @@
 
     <div class="cart-box">
         <%
-            // Use List<MenuItem> to match your cart page's logic
-            List<MenuItem> cart = (List<MenuItem>) session.getAttribute("cartItems");
-            int cartCount = (cart != null) ? cart.size() : 0;
+            // Retrieve current cart from session to update the count
+            List<MenuItem> currentCart = (List<MenuItem>) session.getAttribute("cartItems");
+            int cartCount = (currentCart != null) ? currentCart.size() : 0;
         %>
         <form action="<%= request.getContextPath() %>/viewCart" method="get">
             <button type="submit">Go to Cart (<%= cartCount %>)</button>
@@ -46,9 +47,10 @@
     </div>
 
     <%
-        List<MenuItem> menuItems = (List<MenuItem>) request.getAttribute("menuResults");
-        if (menuItems == null) {
-            menuItems = (List<MenuItem>) request.getAttribute("menuItems");
+        List<MenuItem> menuItems = (List<MenuItem>) request.getAttribute("menuItems");
+        // Fallback for search results
+        if (request.getAttribute("menuResults") != null) {
+            menuItems = (List<MenuItem>) request.getAttribute("menuResults");
         }
     %>
 
@@ -80,14 +82,14 @@
                     }
                 } else {
             %>
-                    <td colspan="5">No items found.</td>
+                    <td colspan="5">No items available in the menu.</td>
             <%
                 }
             %>
         </tr>
     </table>
 
-    <a href="<%= request.getContextPath() %>/browse" class="back-link">Back to Menu</a>
+    <a href="<%= request.getContextPath() %>/browse" class="back-link">Refresh Menu</a>
 
 </body>
 </html>
