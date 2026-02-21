@@ -36,10 +36,10 @@
     <h3>Online Delivery Service</h3>
     <div class="login-box">
         <h2>Checkout Details</h2>
-        <form action="<%= request.getContextPath() %>/login" method="post">
+        <form action="<%= request.getContextPath() %>/viewCart" method="post">
             <input type="text" name="name" placeholder="Full Name" required>
             <input type="text" name="address" placeholder="Delivery Address" required>
-            <input type="text" name="cardnumber" placeholder="9 Digit Card Number" pattern="\d{9}" title="Please enter exactly 9 digits" required>
+            <input type="text" name="cardnumber" placeholder="16 Digit Card Number" pattern="\d{16}" title="Please enter exactly 16 digits" required>
             <button type="submit">Confirm and Place Order</button>
         </form>
 
