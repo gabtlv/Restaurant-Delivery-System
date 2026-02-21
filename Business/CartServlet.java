@@ -25,7 +25,7 @@ public class CartServlet extends HttpServlet {
         }
 
         request.setAttribute("grandTotal", grandTotal);
-        request.getRequestDispatcher("cart.jsp").forward(request, response);
+        request.getRequestDispatcher("viewCart.jsp").forward(request, response);
     }
 
     // NEW POST logic for placing the order
