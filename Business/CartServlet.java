@@ -1,15 +1,16 @@
+package Business;
+
 import Helper.MenuItem;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.util.List;
 
 @WebServlet("/viewCart")
 public class CartServlet extends HttpServlet {
+    
+    // Existing GET logic for viewing the cart
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         
@@ -23,10 +24,27 @@ public class CartServlet extends HttpServlet {
             }
         }
 
-        // Store the calculated total in the request to pass it to the JSP
         request.setAttribute("grandTotal", grandTotal);
+        request.getRequestDispatcher("cart.jsp").forward(request, response);
+    }
+
+    // NEW POST logic for placing the order
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
         
-        // Forward the request to the JSP file
-        request.getRequestDispatcher("viewCart.jsp").forward(request, response);
+        String cardNumber = request.getParameter("cardnumber");
+        
+        // Check if card is exactly 16 digits
+        if (cardNumber != null && cardNumber.length() == 16) {
+            // Logic to clear the cart since order is placed
+            HttpSession session = request.getSession();
+            session.removeAttribute("cartItems");
+            
+            // Forward to viewStatus.jsp
+            request.getRequestDispatcher("viewStatus.jsp").forward(request, response);
+        } else {
+            // If validation fails, send back to checkout with an error (optional)
+            response.sendRedirect(request.getContextPath() + "/placeOrder.jsp?error=invalidcard");
+        }
     }
 }
