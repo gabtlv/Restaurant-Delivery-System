@@ -12,6 +12,7 @@ A web-based restaurant ordering and delivery workflow built with a layered archi
 ## Tech Stack
 - Java (Servlet/JSP)
 - HTML/CSS
+- MySQL
 - Layered architecture (Business, Persistence, Helper)
 - Git/GitHub
 
