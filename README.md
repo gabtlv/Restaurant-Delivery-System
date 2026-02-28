@@ -21,3 +21,15 @@ A web-based restaurant ordering and delivery workflow built with n-layered archi
 - `Persistence/` – database/data access layer (CRUD, queries, storage logic)
 - `Helper/` – shared utilities and models (DTOs, helpers, constants)
 - `*.jsp / *.html` – UI pages (browse, cart, login, checkout, status)
+
+## Use Case Diagram
+![Use Case](images/Restaurant_Use_Case.png)
+
+## ER Diagram
+![ER Diagram](images/Restaurant_ER.png)
+
+## Browse Menu Flow
+![Browse Menu](images/Restaurant_BrowseMenu.png)
+
+## Place Order Flow
+![Place Order](images/Restaurant_PlaceOrder.png)
