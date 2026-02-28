@@ -28,8 +28,8 @@ A web-based restaurant ordering and delivery workflow built with n-layered archi
 ## ER Diagram
 ![ER Diagram](images/Restaurant_ER.png)
 
-## Browse Menu Flow
+## Browse Menu Sequence Diagram
 ![Browse Menu](images/Restaurant_BrowseMenu.png)
 
-## Place Order Flow
+## Place Order Sequence Diagram
 ![Place Order](images/Restaurant_PlaceOrder.png)
