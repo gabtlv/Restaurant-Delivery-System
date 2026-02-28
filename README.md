@@ -1,6 +1,6 @@
 # Restaurant Delivery System
 
-A web-based restaurant ordering and delivery workflow built with a layered architecture (Presentation → Business → Persistence → Helper). Users can log in, browse/search menu items, add items to a cart, place orders, choose a payment method, and view order status.
+A web-based restaurant ordering and delivery workflow built with n-layered architecture (GUI → Business → Persistence → Helper). Users can log in, browse/search menu items, add items to a cart, place orders, choose a payment method, and view order status.
 
 ## Features
 - User login flow (login page + login result)
