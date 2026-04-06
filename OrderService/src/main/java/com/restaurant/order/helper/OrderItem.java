@@ -1,0 +1,20 @@
+package com.restaurant.order.helper;
+
+public class OrderItem {
+    private int menuID;
+    private String itemName;
+    private int quantity;
+    private double itemPrice;
+
+    public OrderItem(int menuID, String itemName, int quantity, double itemPrice) {
+        this.menuID    = menuID;
+        this.itemName  = itemName;
+        this.quantity  = quantity;
+        this.itemPrice = itemPrice;
+    }
+
+    public int getMenuID()       { return menuID; }
+    public String getItemName()  { return itemName; }
+    public int getQuantity()     { return quantity; }
+    public double getItemPrice() { return itemPrice; }
+}

@@ -1,0 +1,7 @@
+com/restaurant/menu/helper/MenuItem.class
+com/restaurant/menu/persistence/MenuItem_CRUD.class
+com/restaurant/menu/business/BrowseServlet.class
+com/restaurant/menu/business/SearchServlet.class
+com/restaurant/menu/endpoint/MenuResource.class
+com/restaurant/menu/endpoint/ApplicationConfig.class
+com/restaurant/menu/util/JWTUtil.class
