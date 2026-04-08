@@ -101,5 +101,5 @@ kubectl apply -f FrontendService/k8s/
 
 ## Author
 
-Gab — [github.com/gabtlv](https://github.com/gabtlv)
-Leilo — [github.com/janleiloterte]((https://github.com/janleiloterte))
+Gab — [gabtlv](https://github.com/gabtlv)
+Leilo — [janleiloterte](https://github.com/janleiloterte)
