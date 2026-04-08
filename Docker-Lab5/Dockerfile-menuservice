@@ -1,0 +1,6 @@
+FROM tomcat:8.5-jdk11-openjdk
+
+COPY ./MenuService-1.0-SNAPSHOT.war /usr/local/tomcat/webapps/MenuService.war
+
+EXPOSE 8080
+
