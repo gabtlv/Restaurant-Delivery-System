@@ -1,0 +1,137 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: usersdb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: usersdb
+  template:
+    metadata:
+      labels:
+        app: usersdb
+    spec:
+      containers:
+      - name: usersdb
+        image: gabtlv/coe692:usersdb
+        ports:
+        - containerPort: 3306
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: menudb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: menudb
+  template:
+    metadata:
+      labels:
+        app: menudb
+    spec:
+      containers:
+      - name: menudb
+        image: gabtlv/coe692:menudb
+        ports:
+        - containerPort: 3306
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontendservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontendservice
+  template:
+    metadata:
+      labels:
+        app: frontendservice
+    spec:
+      containers:
+      - name: frontendservice
+        image: gabtlv/coe692:frontendservice
+        ports:
+        - containerPort: 8080
+        env:
+        - name: cartService
+          value: cartservice:8080
+        - name: menuService
+          value: menuservice:8080
+        - name: DB_URL
+          value: usersdb:3306
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cartservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cartservice
+  template:
+    metadata:
+      labels:
+        app: cartservice
+    spec:
+      containers:
+      - name: cartservice
+        image: gabtlv/coe692:cartservice
+        ports:
+        - containerPort: 8080
+        env:
+        - name: DB_URL
+          value: menudb:3306
+        - name: kubeMQAddress
+          value: "34.118.237.191:50000"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: menuservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: menuservice
+  template:
+    metadata:
+      labels:
+        app: menuservice
+    spec:
+      containers:
+      - name: menuservice
+        image: gabtlv/coe692:menuservice
+        ports:
+        - containerPort: 8080
+        env:
+        - name: DB_URL
+          value: menudb:3306
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orderservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: orderservice
+  template:
+    metadata:
+      labels:
+        app: orderservice
+    spec:
+      containers:
+      - name: orderservice
+        image: gabtlv/coe692:orderservice
+        ports:
+        - containerPort: 8080
+        env:
+        - name: kubeMQAddress
+          value: "34.118.237.191:50000"
