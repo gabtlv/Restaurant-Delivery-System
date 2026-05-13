@@ -2,7 +2,7 @@
 
 A microservices-based restaurant ordering platform built with Java and deployed on Google Kubernetes Engine (GKE). Users can log in, browse the menu, manage a cart, and place orders — with asynchronous messaging handling order processing between services.
 
-# Restaurant Delivery System
+# Live Demo
 
 Live Demo: http://34.19.187.121/FrontendService/login.html      
       Email: test@test.com      
