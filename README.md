@@ -4,8 +4,8 @@ A microservices-based restaurant ordering platform built with Java and deployed 
 
 # Restaurant Delivery System
 
-Live Demo: http://34.19.187.121/FrontendService/login.html
-      Email: test@test.com
+Live Demo: http://34.19.187.121/FrontendService/login.html      
+      Email: test@test.com      
       Password: 1234
 
 ## Architecture
